@@ -2,15 +2,12 @@ package com.carrental.carrentalsystem.security;
 
 import java.io.IOException;
 
-import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.carrental.carrentalsystem.dto.AuthResponse;
 import com.carrental.carrentalsystem.entity.User;
 import com.carrental.carrentalsystem.repository.UserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +20,6 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
         private final UserRepository userRepository;
         private final JwtService jwtService;
-        private final ObjectMapper objectMapper;
 
         @Override
         public void onAuthenticationSuccess(HttpServletRequest request,
@@ -34,16 +30,14 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
                                 .orElseThrow(() -> new ServletException("OAuth2 user could not be resolved"));
 
                 String token = jwtService.generateToken(user);
-                AuthResponse authResponse = AuthResponse.builder()
-                                .accessToken(token)
-                                .tokenType("Bearer")
-                                .userId(user.getId())
-                                .name(user.getName())
-                                .email(user.getEmail())
-                                .role(user.getRole())
-                                .build();
 
-                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                objectMapper.writeValue(response.getOutputStream(), authResponse);
+                String redirectUrl = "http://localhost:5173/oauth2/callback"
+                                + "?token=" + token
+                                + "&userId=" + user.getId()
+                                + "&name=" + java.net.URLEncoder.encode(user.getName(), "UTF-8")
+                                + "&email=" + java.net.URLEncoder.encode(user.getEmail(), "UTF-8")
+                                + "&role=" + user.getRole();
+
+                response.sendRedirect(redirectUrl);
         }
 }

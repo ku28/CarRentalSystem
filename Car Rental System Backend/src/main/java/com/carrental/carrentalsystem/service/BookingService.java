@@ -86,6 +86,18 @@ public class BookingService {
                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + bookingId));
     }
 
+    public List<BookingResponse> getBookingsByStatus(BookingStatus status) {
+        return bookingRepository.findByStatus(status).stream()
+                .map(EntityDtoMapper::toBookingResponse)
+                .toList();
+    }
+
+    public List<BookingResponse> getAllBookings() {
+        return bookingRepository.findAll().stream()
+                .map(EntityDtoMapper::toBookingResponse)
+                .toList();
+    }
+
     public Booking save(Booking booking) {
         return bookingRepository.save(booking);
     }

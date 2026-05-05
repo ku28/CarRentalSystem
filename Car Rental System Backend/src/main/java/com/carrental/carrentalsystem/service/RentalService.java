@@ -77,6 +77,12 @@ public class RentalService {
                 .orElseThrow(() -> new ResourceNotFoundException("Rental not found with id: " + rentalId));
     }
 
+    public java.util.List<RentalResponse> getActiveRentals() {
+        return rentalRepository.findByReturnTimeIsNull().stream()
+                .map(EntityDtoMapper::toRentalResponse)
+                .toList();
+    }
+
     private BigDecimal calculateTotalCost(Rental rental) {
         LocalDateTime pickupTime = rental.getPickupTime();
         LocalDateTime returnTime = rental.getReturnTime();

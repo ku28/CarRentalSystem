@@ -17,26 +17,26 @@ export default function Navbar() {
       </div>
       <div className="navbar-links">
         <Link to="/cars">Cars</Link>
-        {user && (
+        {user && !isAdmin && (
           <>
             <Link to="/bookings">My Bookings</Link>
             <Link to="/notifications">Notifications</Link>
-            {isAdmin && (
-              <>
-                <Link to="/admin/cars">Manage Cars</Link>
-                <Link to="/admin/rentals">Rentals</Link>
-                <Link to="/admin/payments">Payments</Link>
-                <Link to="/admin/reports">Reports</Link>
-                <Link to="/admin/users">Users</Link>
-              </>
-            )}
+          </>
+        )}
+        {isAdmin && (
+          <>
+            <Link to="/admin/cars">Manage Cars</Link>
+            <Link to="/admin/rentals">Rentals</Link>
+            <Link to="/admin/payments">Payments</Link>
+            <Link to="/admin/reports">Reports</Link>
+            <Link to="/admin/users">Users</Link>
           </>
         )}
       </div>
       <div className="navbar-auth">
         {user ? (
           <>
-            <span className="navbar-user">{user.name}</span>
+            <span className="navbar-user">{user.name} ({isAdmin ? 'Admin' : 'User'})</span>
             <button onClick={handleLogout} className="btn btn-sm">Logout</button>
           </>
         ) : (

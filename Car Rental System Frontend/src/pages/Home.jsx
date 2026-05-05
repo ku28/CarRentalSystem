@@ -7,48 +7,79 @@ export default function Home() {
   return (
     <div className="page home-page">
       <div className="hero">
-        <h1>Car Rental Management System</h1>
-        <p>Browse available cars, make bookings, and manage your rentals.</p>
+        <h1>Car Rental System</h1>
+        <p>Browse available vehicles, request bookings, and manage your rentals — all in one place.</p>
         <div className="hero-actions">
           <Link to="/cars" className="btn btn-primary">Browse Cars</Link>
-          {!user && <Link to="/register" className="btn">Get Started</Link>}
+          {!user && <Link to="/register" className="btn">Create Account</Link>}
+          {user && <Link to="/bookings" className="btn">My Bookings</Link>}
+        </div>
+      </div>
+
+      {/* Workflow */}
+      <div className="card" style={{ marginBottom: '20px' }}>
+        <h3>How It Works</h3>
+        <div className="workflow">
+          {[
+            { num: 1, label: 'Register & Login' },
+            { num: 2, label: 'Search Cars' },
+            { num: 3, label: 'Request Booking' },
+            { num: 4, label: 'Car Reserved' },
+            { num: 5, label: 'Pick Up Car' },
+            { num: 6, label: 'Return Car' },
+            { num: 7, label: 'Cost Calculated' },
+            { num: 8, label: 'Payment Done' },
+          ].map((step, i, arr) => (
+            <span key={step.num} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span className="workflow-step">
+                <span className="step-num">{step.num}</span>
+                {step.label}
+              </span>
+              {i < arr.length - 1 && <span className="workflow-arrow">→</span>}
+            </span>
+          ))}
         </div>
       </div>
 
       <div className="card-grid">
         <div className="card">
-          <h3>🚗 Browse Cars</h3>
-          <p>Search and filter available vehicles by brand, model, or category.</p>
+          <h3>🚗 Browse Fleet</h3>
+          <p>View all available cars with search and filters. See pricing, category, and availability at a glance.</p>
         </div>
         <div className="card">
-          <h3>📅 Book Easily</h3>
-          <p>Select your dates and book a car in seconds.</p>
+          <h3>📋 Request Booking</h3>
+          <p>Select dates and send a booking request. The system reserves the vehicle and an admin processes your pickup.</p>
         </div>
         <div className="card">
-          <h3>💳 Simple Payments</h3>
-          <p>Straightforward pricing with no hidden fees.</p>
+          <h3>💰 Transparent Pricing</h3>
+          <p>Cost = rental days × price per day. Get an estimate before booking, final cost calculated at return.</p>
         </div>
       </div>
 
       {isAdmin && (
         <div className="admin-section">
-          <h2>Admin Quick Links</h2>
+          <h2>Admin Dashboard</h2>
+          <p className="page-subtitle">Manage the system</p>
           <div className="card-grid">
             <Link to="/admin/cars" className="card card-link">
-              <h3>Manage Cars</h3>
-              <p>Add, edit, or remove vehicles</p>
+              <h3>🚗 Manage Cars</h3>
+              <p>Add, edit, or remove vehicles from the fleet</p>
             </Link>
             <Link to="/admin/rentals" className="card card-link">
-              <h3>Rentals</h3>
-              <p>Process pickups and returns</p>
+              <h3>🔑 Rentals</h3>
+              <p>Process car pickups and returns</p>
             </Link>
             <Link to="/admin/payments" className="card card-link">
-              <h3>Payments</h3>
-              <p>Process and view payments</p>
+              <h3>💳 Payments</h3>
+              <p>Process and manage payments</p>
             </Link>
             <Link to="/admin/reports" className="card card-link">
-              <h3>Reports</h3>
-              <p>Revenue and usage statistics</p>
+              <h3>📊 Reports</h3>
+              <p>Revenue, bookings, and usage statistics</p>
+            </Link>
+            <Link to="/admin/users" className="card card-link">
+              <h3>👥 Users</h3>
+              <p>View registered users</p>
             </Link>
           </div>
         </div>

@@ -22,10 +22,15 @@ export default function Notifications() {
   return (
     <div className="page">
       <h1>Notifications</h1>
+      <p className="page-subtitle">System messages and booking updates</p>
+
       {loading ? (
-        <p>Loading...</p>
+        <div className="loading">Loading notifications...</div>
       ) : notifications.length === 0 ? (
-        <p>No notifications.</p>
+        <div className="empty-state">
+          <div className="empty-icon">🔔</div>
+          <p>No notifications yet. You'll receive updates when your bookings are processed.</p>
+        </div>
       ) : (
         <div className="notification-list">
           {notifications.map((n) => (

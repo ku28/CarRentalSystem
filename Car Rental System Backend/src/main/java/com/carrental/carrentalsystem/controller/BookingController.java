@@ -5,6 +5,7 @@ import com.carrental.carrentalsystem.dto.BookingResponse;
 import com.carrental.carrentalsystem.dto.CarResponse;
 import com.carrental.carrentalsystem.dto.PageResponse;
 import com.carrental.carrentalsystem.enums.AvailabilityStatus;
+import com.carrental.carrentalsystem.enums.BookingStatus;
 import com.carrental.carrentalsystem.service.BookingService;
 import com.carrental.carrentalsystem.service.CarService;
 import com.carrental.carrentalsystem.service.UserService;
@@ -12,6 +13,7 @@ import jakarta.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,4 +59,17 @@ public class BookingController {
         Long userId = userService.getUserByEmail(principal.getName()).getId();
         return bookingService.getBookingsForUser(userId);
     }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<BookingResponse> getAllBookings() {
+        return bookingService.getAllBookings();
+    }
+
+    @GetMapping("/status/{status}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<BookingResponse> getBookingsByStatus(@PathVariable BookingStatus status) {
+        return bookingService.getBookingsByStatus(status);
+    }
 }
+

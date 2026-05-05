@@ -47,7 +47,7 @@ public class PaymentService {
         User user = rental.getBooking().getUser();
         notificationProducer.send(user.getId(), "Payment completed for rental " + rentalId);
         
-        String emailBody = "Dear " + user.getName() + ",\n\nYour payment of $" + savedPayment.getAmount() + " for rental " + rentalId + " has been successfully processed.";
+        String emailBody = "Dear " + user.getName() + ",\n\nYour payment of ₹" + savedPayment.getAmount() + " for rental " + rentalId + " has been successfully processed.";
         emailService.sendEmail(user.getEmail(), "Payment Confirmation", emailBody);
 
         return EntityDtoMapper.toPaymentResponse(savedPayment);

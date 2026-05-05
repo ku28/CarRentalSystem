@@ -33,4 +33,10 @@ public class RentalController {
     public RentalResponse getRentalByBookingId(@PathVariable Long bookingId) {
         return rentalService.getRentalByBookingId(bookingId);
     }
+
+    @GetMapping("/active")
+    @PreAuthorize("hasRole('ADMIN')")
+    public java.util.List<RentalResponse> getActiveRentals() {
+        return rentalService.getActiveRentals();
+    }
 }

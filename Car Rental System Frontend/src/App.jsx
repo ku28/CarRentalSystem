@@ -13,6 +13,7 @@ import Rentals from './pages/Rentals';
 import Payments from './pages/Payments';
 import Reports from './pages/Reports';
 import Users from './pages/Users';
+import OAuth2Callback from './pages/OAuth2Callback';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/cars" element={<Cars />} />
+            <Route path="/oauth2/callback" element={<OAuth2Callback />} />
             <Route
               path="/bookings"
               element={<ProtectedRoute><Bookings /></ProtectedRoute>}
