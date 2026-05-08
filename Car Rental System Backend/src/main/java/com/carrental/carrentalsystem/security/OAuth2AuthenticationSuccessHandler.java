@@ -31,7 +31,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
                 String token = jwtService.generateToken(user);
 
-                String redirectUrl = "http://100.53.68.223/oauth2/callback"
+                String redirectUrl = "http://100.53.218.250/oauth2/callback"
                                 + "?token=" + token
                                 + "&userId=" + user.getId()
                                 + "&name=" + java.net.URLEncoder.encode(user.getName(), "UTF-8")
