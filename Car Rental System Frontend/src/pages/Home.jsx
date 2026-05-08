@@ -16,31 +16,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Workflow */}
-      <div className="card" style={{ marginBottom: '20px' }}>
-        <h3>How It Works</h3>
-        <div className="workflow">
-          {[
-            { num: 1, label: 'Register & Login' },
-            { num: 2, label: 'Search Cars' },
-            { num: 3, label: 'Request Booking' },
-            { num: 4, label: 'Car Reserved' },
-            { num: 5, label: 'Pick Up Car' },
-            { num: 6, label: 'Return Car' },
-            { num: 7, label: 'Cost Calculated' },
-            { num: 8, label: 'Payment Done' },
-          ].map((step, i, arr) => (
-            <span key={step.num} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span className="workflow-step">
-                <span className="step-num">{step.num}</span>
-                {step.label}
-              </span>
-              {i < arr.length - 1 && <span className="workflow-arrow">→</span>}
-            </span>
-          ))}
-        </div>
-      </div>
-
       <div className="card-grid">
         <div className="card">
           <h3>🚗 Browse Fleet</h3>
