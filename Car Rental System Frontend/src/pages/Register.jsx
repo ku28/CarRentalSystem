@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
 
-const GITHUB_OAUTH_URL = 'http://localhost:8080/oauth2/authorization/github';
+const GITHUB_OAUTH_URL = 'http://34.200.116.160:8080/oauth2/authorization/github';
 
 export default function Register() {
   const [form, setForm] = useState({ name: '', email: '', password: '', role: 'ROLE_USER' });
